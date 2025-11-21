@@ -13,6 +13,11 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                robotoSerif: ['"Roboto Serif"', 'serif'],
+                sourceSerif: ['"Source Serif 4"', 'serif'],
+            },
+            backgroundImage: {
+                'login-bg': "url('/images/background.svg')",
             },
         },
     },
