@@ -32,6 +32,6 @@
     </div>
 
     <div class="text-center">
-        <p>Ainda não tem conta?<spam class="pl-[10px]"><a href="{{ route('register') }}" class="text-blue-700 hover:underline">Cadastre-se</a></spam></p> 
+        <p>Ainda não tem conta?<span class="pl-[10px]"><a href="{{ route('register') }}" class="text-blue-700 hover:underline">Cadastre-se</a></span></p> 
     </div>
 </form>

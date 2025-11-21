@@ -22,7 +22,7 @@
                     <a href="{{ route('login') }}">Login</a>
                 </button>
                 <button class="border-transparent border bg-black text-red-50 rounded-3xl font-semibold px-6 py-2 hover:bg-red-50 hover:border hover:border-black  hover:text-black transition">
-                    Começar Agora
+                     <a href="{{ route('register') }}">Começar Agora</a>
                 </button>
             </div>
         </nav> 

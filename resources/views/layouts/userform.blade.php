@@ -7,10 +7,9 @@
     <title>@yield('title')</title>
     @vite('resources/css/app.css') 
 </head>
-<body class="flex flex-row w-full  bg-slate-950 h-screen" style="background-image: url('/images/background.svg'); background-size: cover; background-position: center;">
-    
+<body class="flex flex-row w-full  bg-slate-950 h-screen" style="background-image: url('/images/background.png'); background-size: cover; background-position: center;">
 
-    <div class="w-[45%] h-screen flex-col align-center bg-red-50">
+    <div class="w-[45%] h-[105vh] flex-col align-center bg-red-50 pb-10">
         <header class="logo w-full">
             <div class="p-[40px] pb-0">
                 <img class="w-[140px]" src="{{ asset('images/logo.svg') }}" alt="">
