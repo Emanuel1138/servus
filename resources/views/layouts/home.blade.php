@@ -8,7 +8,7 @@
 </head>
 <body class="bg-red-50">
     <header>
-        <nav class="navbar flex justify-between pt-[20px] pr-[160px] pl-[160px]">
+        <nav class="navbar flex justify-between pt-[20px] pr-[15%] pl-[15%]">
             <div class="logo">
                 <a href="{{ route('welcome') }}"><img class="w-[170px]" src="{{ asset('images/logo.svg') }}" alt="Logo"></a>
             </div>
