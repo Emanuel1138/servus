@@ -10,7 +10,7 @@
 
     <header class="bg-gray-100 p-[10px] pr-[20px] border-b border-gray-400 flex justify-between items-center relative">
         <div class="logo">
-            <a href="{{ route('welcome') }}"><img class="w-[130px]" src="{{ asset('images/logomarcablack.svg') }}" alt="Logo"></a>
+            <a href="{{ route('groups.index') }}"><img class="w-[130px]" src="{{ asset('images/logomarcablack.svg') }}" alt="Logo"></a>
         </div>
 
         <div class="profile-elements flex gap-[20px] items-center">
@@ -23,12 +23,10 @@
                 <a href="#"><img class="w-[22px]" src="{{ asset('images/icons/Bell.svg') }}" alt="Notifications"></a>
             </div>
 
-            <!-- Ícone do usuário -->
             <div id="userMenuButton" class="profile-icon rounded-full border-2 border-gray-700 cursor-pointer p-1">
                 <img class="w-[22px]" src="{{ asset('images/icons/user.svg') }}" alt="User Profile">
             </div>
 
-            <!-- Dropdown -->
             <div id="userMenu" class="hidden absolute top-[70px] right-[20px] bg-white border border-gray-300 shadow-lg rounded-lg w-[180px] py-2 z-50">
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100">Perfil</a>
                 <a href="#" class="block px-4 py-2 hover:bg-gray-100">Configurações</a>

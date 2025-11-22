@@ -21,15 +21,16 @@
             @else
             @foreach ( $groups as $group)
                 <div class="card-group group bg-gray-100 rounded-2xl w-[400px] h-[250px] border border-gray-400 pt-[30px] p-[30px] 
-                transition-all duration-200 hover:shadow-lg hover:border-gray-500 cursor-pointer">
-
+                transition-all duration-200 hover:shadow-lg hover:border-gray-500">
                     <div class="flex justify-between items-start">
-                        <h2 class="text-lg font-medium flex items-center gap-2">{{ $group->parash }}</h2>
-
+                        <a href="{{ route('dashboard', ['groupId' => $group->id]) }}">
+                            <h2 class="text-lg font-medium flex items-center gap-2 hover:underline">{{ $group->parash }}</h2>
+                        </a>
                         <div class="inline-block transform transition-all duration-200 group-hover:translate-x-1">
-                                <a href="#"><img class="w-[25px]" src="{{ asset('images/icons/chevron-right.svg') }}" alt="arrow"></a>
+                            <img class="w-[25px]" src="{{ asset('images/icons/chevron-right.svg') }}" alt="arrow">
                         </div>
                     </div>
+                    
 
                     <div class="bg-gray-300 border border-gray-400 rounded-lg mt-[20px] p-1">
                         @if ($group->countUsers() === 1) 
