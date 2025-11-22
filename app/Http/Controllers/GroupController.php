@@ -67,25 +67,46 @@ class GroupController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Group $group)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Group $group)
     {
-        //
+        if (! Auth::check()) {
+            abort(403);
+        }
+
+        $isCoordinator = $group->users()
+            ->where('user_id', Auth::id())
+            ->wherePivot('is_coordinator', true)
+            ->exists();
+
+        if (! $isCoordinator) {
+            abort(403, 'Você não tem permissão para atualizar este grupo.');
+        }
+
+        $request->validate([
+            'parash' => 'required|string',
+            'diocese' => 'required|string',
+            'city' => 'required|string',
+            'state' => 'required|string',
+        ]);
+
+        $group->update([
+            'parash' => $request->parash,
+            'diocese' => $request->diocese,
+            'city' => $request->city,
+            'state' => $request->state,
+        ]);
+
+        return redirect()
+            ->route('dashboard.settings', ['groupId' => $group->id])
+            ->with('success', 'Grupo atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Group $group)
     {
         //
