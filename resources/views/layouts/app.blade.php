@@ -60,19 +60,16 @@
             <script>
                 document.addEventListener("DOMContentLoaded", () => {
                     const flash = document.getElementById("flash-success");
-                    const button = document.getElementById("close-flash");
+                    const btn = document.getElementById("close-flash");
 
-                    if (button) {
-                        button.addEventListener("click", () => {
+                    if (btn) {
+                        btn.addEventListener("click", () => {
                             flash.style.opacity = "0";
-                            // setTimeout(() => flash.remove(), 300);
                         });
                     }
                 });
             </script>
         @endif
-
-
 
         @yield('content')
     </main>
@@ -85,7 +82,6 @@
         <p>&copy 2025 Servus. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Script para abrir/fechar o dropdown -->
     <script>
         const button = document.getElementById('userMenuButton');
         const menu = document.getElementById('userMenu');
@@ -94,7 +90,6 @@
             menu.classList.toggle('hidden');
         });
 
-        // Fechar ao clicar fora
         document.addEventListener('click', (event) => {
             if (!button.contains(event.target) && !menu.contains(event.target)) {
                 menu.classList.add('hidden');

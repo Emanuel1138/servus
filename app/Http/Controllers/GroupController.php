@@ -44,14 +44,15 @@ class GroupController extends Controller
             'owner_id'  => Auth::id(),
         ]);
 
+        $group->users()->attach(Auth::id(), [
+            'is_coordinator' => true,
+        ]);
+
         return redirect()
             ->route('groups.index')
             ->with('success', 'Grupo criado com sucesso!');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Group $group)
     {
         //
