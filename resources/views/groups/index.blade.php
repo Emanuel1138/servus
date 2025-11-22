@@ -8,7 +8,7 @@
             <h1 class="text-2xl">Grupos</h1>
             <div>
                 <button>
-                    <a href="#" class="bg-green-400 border border-green-700 px-4 py-2 rounded-lg hover:bg-green-500 transition-colors duration-200">
+                    <a href="{{ route('groups.create') }}" class="bg-green-400 border border-green-700 px-4 py-2 rounded-lg hover:bg-green-500 transition-colors duration-200">
                         <span class="text-2xl text-green-800">+</span> Novo Grupo
                     </a>
                 </button>

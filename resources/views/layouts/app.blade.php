@@ -41,8 +41,39 @@
 
         </div>
     </header>
+    
 
     <main class="flex-1 bg-gray-200 ">
+        
+        @if(session('success'))
+            <div id="flash-success" class="fixed top-4 right-4 z-50 w-[300px] transition-opacity duration-300">
+                <div class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded shadow-lg flex justify-between items-start">
+
+                    <span>{{ session('success') }}</span>
+
+                    <button id="close-flash" class="text-green-700 font-bold hover:text-green-900 ml-3" aria-label="Fechar">
+                        &times;
+                    </button>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const flash = document.getElementById("flash-success");
+                    const button = document.getElementById("close-flash");
+
+                    if (button) {
+                        button.addEventListener("click", () => {
+                            flash.style.opacity = "0";
+                            // setTimeout(() => flash.remove(), 300);
+                        });
+                    }
+                });
+            </script>
+        @endif
+
+
+
         @yield('content')
     </main>
 
