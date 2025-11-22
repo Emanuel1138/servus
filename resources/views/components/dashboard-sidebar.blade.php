@@ -1,4 +1,4 @@
-<div class="bg-gray-100 w-64 h-screen flex flex-col border-r border-gray-400">
+<div class="bg-gray-100 w-64 min-h-screen flex flex-col border-r border-gray-400">
     <div class="p-6 border-b border-gray-400">
         <h1 class="font-sourceSerif text-xl font-semibold">{{ $group->parash }}</h1>
     </div>

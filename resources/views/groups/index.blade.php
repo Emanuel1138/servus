@@ -3,7 +3,7 @@
 @section('title', 'Servus | Groups')
 
 @section('content')
-    <div class="pl-[70px] pr-[70px]">
+    <div class="pl-[70px] pr-[70px] min-h-screen">
         <div class="pl-0 p-[30px] flex justify-between items-center border-b border-gray-400 mb-[40px]">
             <h1 class="text-2xl">Grupos</h1>
             <div>

@@ -41,7 +41,7 @@
     </header>
     
 
-    <main class="flex-1 bg-gray-200 ">
+    <main class="min-h-full bg-gray-200 ">
         
         @if(session('success'))
             <div id="flash-success" class="fixed top-4 right-4 z-50 w-[300px] transition-opacity duration-300">

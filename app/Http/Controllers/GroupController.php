@@ -109,6 +109,23 @@ class GroupController extends Controller
 
     public function destroy(Group $group)
     {
-        //
-    }
+        if (! Auth::check()) {
+            abort(403);
+        }
+
+        $isCoordinator = $group->users()
+            ->where('user_id', Auth::id())
+            ->wherePivot('is_coordinator', true)
+            ->exists();
+
+        if (! $isCoordinator) {
+            abort(403, 'Você não tem permissão para deletar este grupo.');
+        }
+
+        $group->delete();
+
+        return redirect()
+            ->route('groups.index')
+            ->with('success', 'Grupo deletado com sucesso!');
+        }
 }
