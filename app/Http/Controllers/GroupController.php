@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,15 @@ class GroupController extends Controller
 
     public function index()
     {
-        return view('groups.index');
+        if (! Auth::check()) {
+            abort(403);
+        }
+
+        $user = Auth::user();
+
+        $groups = $user->groups;
+
+        return view('groups.index', compact('groups'));
     }
 
     public function create()

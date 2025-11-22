@@ -16,74 +16,29 @@
         </div>
 
         <div class="grid grid-cols-3 gap-[30px] pb-[50px]">
-            <div class="card-group group bg-gray-100 rounded-2xl w-[400px] h-[250px] border border-gray-400 pt-[30px] p-[30px] 
-            transition-all duration-200 hover:shadow-lg hover:border-gray-500 cursor-pointer">
+            
+            @foreach ( $groups as $group)
+                <div class="card-group group bg-gray-100 rounded-2xl w-[400px] h-[250px] border border-gray-400 pt-[30px] p-[30px] 
+                transition-all duration-200 hover:shadow-lg hover:border-gray-500 cursor-pointer">
 
-                <div class="flex justify-between items-start">
-                    <h2 class="text-lg font-medium flex items-center gap-2">
-                        Nome do grupo                    
-                    </h2>
+                    <div class="flex justify-between items-start">
+                        <h2 class="text-lg font-medium flex items-center gap-2">{{ $group->parash }}</h2>
 
-                    <div class="inline-block transform transition-all duration-200 group-hover:translate-x-1">
-                            <a href="#"><img class="w-[25px]" src="{{ asset('images/icons/chevron-right.svg') }}" alt="arrow"></a>
+                        <div class="inline-block transform transition-all duration-200 group-hover:translate-x-1">
+                                <a href="#"><img class="w-[25px]" src="{{ asset('images/icons/chevron-right.svg') }}" alt="arrow"></a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-300 border border-gray-400 rounded-lg mt-[20px] p-1">
+                        @if ($group->countUsers() === 1) 
+                            <p>{{ $group->countUsers() }} membro</p>
+                        @else
+                            <p>{{ $group->countUsers() }} membros</p>
+                        @endif
                     </div>
                 </div>
-
-                <div class="bg-gray-300 border border-gray-400 rounded-lg mt-[20px] p-1">
-                    <p>12 membros</p>
-                </div>
-            </div>
-            <div class="card-group group bg-gray-100 rounded-2xl w-[400px] h-[250px] border border-gray-400 pt-[30px] p-[30px] 
-            transition-all duration-200 hover:shadow-lg hover:border-gray-500 cursor-pointer">
-
-                <div class="flex justify-between items-start">
-                    <h2 class="text-lg font-medium flex items-center gap-2">
-                        Nome do grupo                    
-                    </h2>
-
-                    <div class="inline-block transform transition-all duration-200 group-hover:translate-x-1">
-                            <a href="#"><img class="w-[25px]" src="{{ asset('images/icons/chevron-right.svg') }}" alt="arrow"></a>
-                    </div>
-                </div>
-
-                <div class="bg-gray-300 border border-gray-400 rounded-lg mt-[20px] p-1">
-                    <p>12 membros</p>
-                </div>
-            </div>
-            <div class="card-group group bg-gray-100 rounded-2xl w-[400px] h-[250px] border border-gray-400 pt-[30px] p-[30px] 
-            transition-all duration-200 hover:shadow-lg hover:border-gray-500 cursor-pointer">
-
-                <div class="flex justify-between items-start">
-                    <h2 class="text-lg font-medium flex items-center gap-2">
-                        Nome do grupo                    
-                    </h2>
-
-                    <div class="inline-block transform transition-all duration-200 group-hover:translate-x-1">
-                            <a href="#"><img class="w-[25px]" src="{{ asset('images/icons/chevron-right.svg') }}" alt="arrow"></a>
-                    </div>
-                </div>
-
-                <div class="bg-gray-300 border border-gray-400 rounded-lg mt-[20px] p-1">
-                    <p>12 membros</p>
-                </div>
-            </div>
-            <div class="card-group group bg-gray-100 rounded-2xl w-[400px] h-[250px] border border-gray-400 pt-[30px] p-[30px] 
-            transition-all duration-200 hover:shadow-lg hover:border-gray-500 cursor-pointer">
-
-                <div class="flex justify-between items-start">
-                    <h2 class="text-lg font-medium flex items-center gap-2">
-                        Nome do grupo                    
-                    </h2>
-
-                    <div class="inline-block transform transition-all duration-200 group-hover:translate-x-1">
-                            <a href="#"><img class="w-[25px]" src="{{ asset('images/icons/chevron-right.svg') }}" alt="arrow"></a>
-                    </div>
-                </div>
-
-                <div class="bg-gray-300 border border-gray-400 rounded-lg mt-[20px] p-1">
-                    <p>12 membros</p>
-                </div>
-            </div>
+            @endforeach
+            
         </div>
     </div>
     

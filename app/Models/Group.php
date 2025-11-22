@@ -29,4 +29,9 @@ class Group extends Model
             ->withPivot('is_coordinator')
             ->withTimestamps();
     }
+
+    public function countUsers()
+    {
+        return $this->users()->count();
+    }
 }
