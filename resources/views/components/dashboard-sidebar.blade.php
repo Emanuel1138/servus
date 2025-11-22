@@ -4,9 +4,10 @@
     </div>
     
     <nav class="flex flex-col gap-4 p-6">
-        <a href="{{ route('dashboard', ['groupId' => $group->id]) }}" class="hover:bg-gray-700 p-2 rounded transition">Home</a>
-        <a href="#" class="hover:bg-gray-700 p-2 rounded transition">Meus Grupos</a>
-        <a href="#" class="hover:bg-gray-700 p-2 rounded transition">Perfil</a>
-        <a href="#" class="hover:bg-gray-700 p-2 rounded transition">Sair</a>
+        <a href="{{ route('dashboard', ['groupId' => $group->id]) }}" class="flex border border-transparent gap-[10px] hover:bg-gray-300  hover:border-gray-400 p-2 rounded transition"><img src="{{ asset('images/icons/home.svg') }}" alt="home">Início</a>
+        <a href="#" class="flex gap-[10px] border border-transparent hover:bg-gray-300 hover:border-gray-400 p-2 rounded transition"><img src="{{ asset('images/icons/Calendar.svg') }}" alt="escalas">Escalas das Missas</a>
+        <a href="#" class="flex gap-[10px] border border-transparent hover:bg-gray-300 hover:border-gray-400 p-2 rounded transition"><img src="{{ asset('images/icons/Book-open.svg') }}" alt="formações">Formações</a>
+        <a href="#" class="flex gap-[10px] border border-transparent hover:bg-gray-300 hover:border-gray-400 p-2 rounded transition"><img src="{{ asset('images/icons/gallery.svg') }}" alt="galeria">Galeria</a>
+        <a href="#" class="flex gap-[10px] border border-transparent hover:bg-gray-300 hover:border-gray-400 p-2 rounded transition"><img src="{{ asset('images/icons/Settings.svg') }}" alt="configurações">Configurações</a>
     </nav>
 </div>
