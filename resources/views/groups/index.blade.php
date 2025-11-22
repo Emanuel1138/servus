@@ -16,7 +16,9 @@
         </div>
 
         <div class="grid grid-cols-3 gap-[30px] pb-[50px]">
-            
+            @if($groups->isEmpty())
+                <p>Você ainda não participa de nenhum grupo.</p>
+            @else
             @foreach ( $groups as $group)
                 <div class="card-group group bg-gray-100 rounded-2xl w-[400px] h-[250px] border border-gray-400 pt-[30px] p-[30px] 
                 transition-all duration-200 hover:shadow-lg hover:border-gray-500 cursor-pointer">
@@ -38,7 +40,7 @@
                     </div>
                 </div>
             @endforeach
-            
+            @endif
         </div>
     </div>
     
