@@ -12,9 +12,13 @@
 
             <div class="pb-[30px] border-b border-gray-400">
                 <h2 class="mb-[20px] font-medium">Iniciar uma nova formação</h2>
-                <div class="bg-gray-100 w-[140px] h-[180px] border border-gray-400 rounded flex justify-center items-center hover:border-yellow-500 hover:cursor-pointer">
-                    <div><img src="{{ asset('images/icons/Plus.svg') }}"></div>
-                </div>
+
+                <form action="{{ route('formations.store', $group->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-gray-100 w-[140px] h-[180px] border border-gray-400 rounded flex justify-center items-center hover:border-yellow-500 hover:cursor-pointer">
+                        <img src="{{ asset('images/icons/Plus.svg') }}">
+                    </button>
+                </form>
             </div>
         </main>
     </div>

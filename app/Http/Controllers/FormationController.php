@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Formation;
-use Illuminate\Http\Request;
 use App\Models\Group;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class FormationController extends Controller
 {
+    private function generateUntitledName($groupId)
+    {
+        $base = 'Formação sem título';
+
+        $count = Formation::where('group_id', $groupId)
+            ->where('title', 'LIKE', $base . '%')
+            ->count();
+
+        return $count === 0 ? $base : $base . ' (' . $count . ')';
+    }
 
     public function index($groupId)
     {
@@ -16,21 +28,37 @@ class FormationController extends Controller
         return view('dashboard.formations.index', compact('group'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store($groupId)
     {
-        //
+        if (! Auth::check()) {
+            abort(403);
+        }
+
+        $group = Group::findOrFail($groupId);
+
+        $title = $this->generateUntitledName($group->id);
+
+        $slug = Str::slug($title) . '-' . Str::random(6);
+
+        $formation = Formation::create([
+            'group_id'       => $group->id,
+            'title'          => $title,
+            'slug'           => $slug,
+            'body_html'      => null,       
+            'body_delta'     => null,
+            'is_public'      => false,
+            'last_edited_by' => Auth::id(),
+        ]);
+
+        return redirect()
+            ->route('formations.edit', [$formation->id]);
     }
+
 
     /**
      * Display the specified resource.
@@ -45,7 +73,7 @@ class FormationController extends Controller
      */
     public function edit(Formation $formation)
     {
-        //
+        return view('dashboard.formations.edit', compact('formation'));
     }
 
     /**

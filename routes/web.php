@@ -20,8 +20,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
 
     Route::get('/dashboard/{groupId}', [DashboardController::class, 'show'])->name('dashboard');
+
     Route::get('/dashboard/formations/{groupId}', [FormationController::class, 'index'])
     ->name('dashboard.formations.index');
+    Route::post('/dashboard/{groupId}/formations', [FormationController::class, 'store'])->name('formations.store');
+    Route::get('/dashboard/formations/{formation}/edit', [FormationController::class, 'edit'])
+    ->name('formations.edit');
+
     Route::get('/dashboard/settings/{groupId}', [SettingsController::class, 'show'])->name('dashboard.settings');
 
 });

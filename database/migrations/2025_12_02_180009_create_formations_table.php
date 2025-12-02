@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('title');
             $table->string('slug')->unique();
-            $table->longText('body_html');
+            $table->longText('body_html')->nullable();
             $table->json('body_delta')->nullable();
             $table->boolean('is_public')->default(false);
 
