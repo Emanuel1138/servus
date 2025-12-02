@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\FormationController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
 
     Route::get('/dashboard/{groupId}', [DashboardController::class, 'show'])->name('dashboard');
+    Route::get('/dashboard/formations/{groupId}', [FormationController::class, 'index'])
+    ->name('dashboard.formations.index');
     Route::get('/dashboard/settings/{groupId}', [SettingsController::class, 'show'])->name('dashboard.settings');
 
 });

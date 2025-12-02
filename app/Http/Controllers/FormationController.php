@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Formation;
 use Illuminate\Http\Request;
+use App\Models\Group;
 
 class FormationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index($groupId)
     {
-        //
+        $group = Group::findOrFail($groupId);
+
+        return view('dashboard.formations.index', compact('group'));
     }
 
     /**
