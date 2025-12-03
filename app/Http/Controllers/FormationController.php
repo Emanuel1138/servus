@@ -58,30 +58,47 @@ class FormationController extends Controller
         return redirect()->route('formations.edit', [$formation->slug]);
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show(Formation $formation)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Formation $formation)
     {
         return view('dashboard.formations.edit', compact('formation'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Formation $formation)
     {
-        //
+        if (! Auth::check()) {
+            abort(403);
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'body_html' => 'nullable|string',
+            'body_delta' => 'nullable|json',
+            'is_public' => 'boolean',
+        ]);
+
+        if (isset($validated['title']) && $validated['title'] !== $formation->title) {
+            $validated['slug'] = Str::slug($validated['title']);
+
+            $count = Formation::where('slug', 'like', "{$validated['slug']}%")
+                            ->where('id', '!=', $formation->id)
+                            ->count();
+            if ($count > 0) {
+                $validated['slug'] .= '-' . ($count + 1);
+            }
+        }
+
+        $validated['last_edited_by'] = Auth::id();
+
+        $formation->update($validated);
+
+        return redirect()->route('formations.edit', compact('formation'))->with('success', 'Formação atualizada com sucesso!');
     }
+
 
     /**
      * Remove the specified resource from storage.

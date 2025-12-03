@@ -8,10 +8,11 @@
     @vite('resources/css/app.css') 
 </head>
 <body class="bg-gray-200">
-<form action="#" method="POST">
+<form action="{{ route('formations.update', $formation) }}" method="POST">
     @csrf
     @method('PUT')
     <header class="bg-gray-100 border-b border-gray-400 flex p-[10px] pl-[30px] items-center gap-4">
+        <a href=""></a>
         <img class="w-[25px]" src="{{ asset('images/Arrow-left.svg') }}" alt="Logo">
         <div class="flex items-center ml-4">
             <input class="border-none bg-transparent text-[20px] rounded-[4px] p-1" type="text" value="{{ old('title', $formation->title) }}" name="title" id="title">
@@ -21,6 +22,34 @@
         </button>
     </header>
     <main class="flex flex-col items-center pl-[20px] pr-[20px] pt-[10px] gap-[10px]">
+        @if(session('success'))
+    <div id="flash-success" class="fixed top-4 right-4 z-50 w-[300px] transition-opacity duration-300">
+        <div class="bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded shadow-lg flex justify-between items-start">
+            <span>{{ session('success') }}</span>
+            <button type="button" id="close-flash" class="text-green-700 font-bold hover:text-green-900 ml-3" aria-label="Fechar">&times;</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const flash = document.getElementById("flash-success");
+            const btn = document.getElementById("close-flash");
+
+            if (flash && btn) {
+                btn.addEventListener("click", () => {
+                    flash.style.opacity = "0";
+                    setTimeout(() => flash.style.display = "none", 300);
+                });
+
+                setTimeout(() => {
+                    flash.style.opacity = "0";
+                    setTimeout(() => flash.style.display = "none", 300);
+                }, 5000);
+            }
+        });
+    </script>
+@endif
+
         <div id="toolbar" class="ql-toolbar border-0 w-full bg-gray-100 rounded-2xl gap-[30px]">
             <select class="ql-header">
                 <option value="1">Título 1</option>
@@ -49,10 +78,11 @@
             <button class="ql-clean"></button>
         </div>
 
-        <div id="editor" class="bg-gray-100 w-[60%] h-16 border border-gray-400">
-            {!! old('body_html', $formation->body_html) !!}
+        <div id="editor" class="bg-gray-100 w-[60%] h-64 border border-gray-400" data-initial="{{ old('body_html', $formation->body_html ?? '<p>Digite aqui...</p>') }}">
         </div>
+
         <input type="hidden" name="body_html" id="body_html">
+        <input type="hidden" name="body_delta" id="body_delta">
     </main>
 </form>
 </body>

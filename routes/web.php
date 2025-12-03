@@ -26,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/dashboard/{groupId}/formations', [FormationController::class, 'store'])->name('formations.store');
     Route::get('/dashboard/formations/{formation}/edit', [FormationController::class, 'edit'])
     ->name('formations.edit');
+    Route::put('dashboard/formations/{formation}', [FormationController::class, 'update'])
+     ->name('formations.update');
+
 
     Route::get('/dashboard/settings/{groupId}', [SettingsController::class, 'show'])->name('dashboard.settings');
 
