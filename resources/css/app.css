@@ -6,3 +6,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+    border: #9ca3af 1px solid !important;
+    padding: 25px 90px !important;
+    height: 100vh !important;
+}
+

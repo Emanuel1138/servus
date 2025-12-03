@@ -55,8 +55,7 @@ class FormationController extends Controller
             'last_edited_by' => Auth::id(),
         ]);
 
-        return redirect()
-            ->route('formations.edit', [$formation->id]);
+        return redirect()->route('formations.edit', [$formation->slug]);
     }
 
 
