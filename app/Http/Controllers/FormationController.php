@@ -81,6 +81,13 @@ class FormationController extends Controller
             'is_public' => 'boolean',
         ]);
 
+        if ($validated['body_html'] === null || $validated['body_html'] === '') {
+            unset($validated['body_html']);
+        }
+        if ($validated['body_delta'] === null || $validated['body_delta'] === '') {
+            unset($validated['body_delta']);
+        }
+
         if (isset($validated['title']) && $validated['title'] !== $formation->title) {
             $validated['slug'] = Str::slug($validated['title']);
 
@@ -100,9 +107,6 @@ class FormationController extends Controller
     }
 
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Formation $formation)
     {
         //
