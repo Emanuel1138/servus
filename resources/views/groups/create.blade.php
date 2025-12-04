@@ -3,7 +3,7 @@
 @section('title', 'Criar Grupo')
 
 @section('content')
-<div class="max-w-xl mx-auto mt-10 mb-10">
+<div class="m-[30%] min-h-screen mt-9 mb-9">
 
     <div class="bg-white border border-gray-400 rounded-lg shadow-md">
 
@@ -15,7 +15,7 @@
         <form action="{{ route('groups.store') }}" method="POST">
             @csrf
 
-               <div class="border-b border-gray-300 px-6 py-4 flex">
+               <div class="border-b border-gray-300 px-6 py-4 flex pt-[30px] pb-[30px]">
                     <div class="max-w-2">
                          <label for="parash" class="block text-gray-700 font-medium mb-1">Paróquia</label>
                     </div>
@@ -29,7 +29,7 @@
                     
                </div>
 
-               <div class="border-b border-gray-300 px-6 py-4 flex">
+               <div class="border-b border-gray-300 px-6 py-4 flex pt-[30px] pb-[30px]">
                     <div class="max-w-2">
                          <label for="diocese" class="block text-gray-700 font-medium mb-1">Diocese</label>
                     </div>
@@ -44,7 +44,7 @@
                     
                </div>
 
-               <div class="border-b border-gray-300 px-6 py-4 flex">
+               <div class="border-b border-gray-300 px-6 py-4 flex pt-[30px] pb-[30px]">
                     <div class="max-w-2">
                          <label for="city" class="block text-gray-700 font-medium mb-1">Cidade</label>
                     </div>
@@ -59,7 +59,7 @@
                     
                </div>
 
-               <div class="border-b border-gray-300 px-6 py-4 flex">
+               <div class="border-b border-gray-300 px-6 py-4 flex pt-[30px] pb-[30px]">
                     <div class="max-w-2">
                          <label for="state" class="block text-gray-700 font-medium mb-1">Estado</label>
                     </div>
