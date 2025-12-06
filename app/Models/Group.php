@@ -34,4 +34,10 @@ class Group extends Model
     {
         return $this->users()->count();
     }
+
+    public function formations()
+    {
+        return $this->hasMany(Formation::class);
+    }
+
 }

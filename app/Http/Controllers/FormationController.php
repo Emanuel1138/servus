@@ -25,8 +25,11 @@ class FormationController extends Controller
     {
         $group = Group::findOrFail($groupId);
 
-        return view('dashboard.formations.index', compact('group'));
+        $formations = $group->formations()->orderBy('updated_at', 'desc')->get();
+
+        return view('dashboard.formations.index', compact('group', 'formations'));
     }
+
 
     public function create()
     {
