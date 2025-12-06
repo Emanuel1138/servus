@@ -116,6 +116,8 @@ class FormationController extends Controller
 
     public function destroy(Formation $formation)
     {
-        //
+        $formation->delete();
+
+        return redirect()->route('dashboard.formations.index', $formation->group->id)->with('success', 'Formação removida com sucesso!');
     }
 }

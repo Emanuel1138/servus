@@ -28,6 +28,8 @@ Route::middleware('auth')->group(function () {
     ->name('formations.edit');
     Route::put('dashboard/formations/{formation}', [FormationController::class, 'update'])
      ->name('formations.update');
+    Route::delete('dashboard/formations/{formation}', [FormationController::class, 'destroy'])
+     ->name('formations.destroy');
 
 
     Route::get('/dashboard/settings/{groupId}', [SettingsController::class, 'show'])->name('dashboard.settings');

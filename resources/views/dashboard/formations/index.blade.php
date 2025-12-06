@@ -23,15 +23,23 @@
 
             <div>
                 <h2 class="text-xl mt-[30px] mb-[20px] font-medium">Formações recentes</h2>
-                @if ($formations == null)
+                @if ($formations->isEmpty())
                     <p class="mt-[20px] text-gray-600">Nenhuma formação disponível.</p>
                 @else
                     @foreach ($formations as $formation)
-                        <div class="bg-gray-100 mt-[20px] p-[15px] border border-gray-400 rounded hover:border-yellow-500">
-                            <a href="{{ route('formations.edit', $formation->slug) }}" class="text-lg font-medium text-gray-800 hover:underline">
+                        <div class="bg-gray-100 mt-[20px] p-[15px] border border-gray-400 rounded hover:border-yellow-500 flex justify-between items-center">
+                            <div>
+                                <a href="{{ route('formations.edit', $formation->slug) }}" class="text-lg font-medium text-gray-800 hover:underline">
                                 {{ $formation->title }}
-                            </a>
-                            <p class="text-sm text-gray-600">Última edição: {{ $formation->updated_at->format('d/m/Y H:i') }}</p>
+                                </a>
+                                <p class="text-sm text-gray-600">Última edição: {{ $formation->updated_at->format('d/m/Y H:i') }}</p>
+                            </div>
+                            
+                            <form action="{{ route('formations.destroy', $formation) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="mt-[10px] flex items-center gap-2 text-red-600 hover:underline"><img src="{{ asset('images/icons/Trash.svg') }}" alt="">Remover</button>
+                            </form>
                         </div>
                     @endforeach
                 @endif
