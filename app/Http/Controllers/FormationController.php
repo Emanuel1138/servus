@@ -55,7 +55,8 @@ class FormationController extends Controller
             'last_edited_by' => Auth::id(),
         ]);
 
-        return redirect()->route('formations.edit', [$formation->slug]);
+        return redirect()->route('formations.edit', $formation->slug);
+
     }
 
     public function show(Formation $formation)
@@ -65,8 +66,11 @@ class FormationController extends Controller
 
     public function edit(Formation $formation)
     {
-        return view('dashboard.formations.edit', compact('formation'));
+        $group = $formation->group;
+
+        return view('dashboard.formations.edit', compact('formation', 'group'));
     }
+
 
     public function update(Request $request, Formation $formation)
     {

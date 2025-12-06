@@ -12,8 +12,8 @@
     @csrf
     @method('PUT')
     <header class="bg-gray-100 border-b border-gray-400 flex p-[10px] pl-[30px] items-center gap-4">
-        <a href=""></a>
-        <img class="w-[25px]" src="{{ asset('images/Arrow-left.svg') }}" alt="Logo">
+        <a href="{{ route('dashboard.formations.index', $group->id) }}"><img class="w-[25px]" src="{{ asset('images/Arrow-left.svg') }}" alt="Logo"></a>
+        
         <div class="flex items-center ml-4">
             <input class="border-none bg-transparent text-[20px] rounded-[4px] p-1" type="text" value="{{ old('title', $formation->title) }}" name="title" id="title">
         </div> 
