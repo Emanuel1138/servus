@@ -31,8 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('dashboard/formations/{formation}', [FormationController::class, 'destroy'])
      ->name('formations.destroy');
 
-
     Route::get('/dashboard/settings/{groupId}', [SettingsController::class, 'show'])->name('dashboard.settings');
+    Route::get('/profile', function () {
+        return view('profile.show');
+    })->name('profile.show');
 
 });
 
