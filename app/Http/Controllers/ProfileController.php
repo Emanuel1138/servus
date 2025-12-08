@@ -36,8 +36,10 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        //
+        return view('profile.show', compact('profile'));
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -52,7 +54,19 @@ class ProfileController extends Controller
      */
     public function update(Request $request, Profile $profile)
     {
-        //
+        $validated = $request->validate([
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['nullable', 'string', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:20'],
+            'birth_date' => ['nullable', 'date'],
+            'investiture_date' => ['nullable', 'date'],
+        ]);
+
+        $profile->update($validated);
+
+        return redirect()
+            ->back()
+            ->with('success', 'Perfil atualizado com sucesso!');
     }
 
     /**

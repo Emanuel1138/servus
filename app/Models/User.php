@@ -52,4 +52,10 @@ class User extends Authenticatable
                     ->withPivot('is_coordinator')
                     ->withTimestamps();
     }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
 }

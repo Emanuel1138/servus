@@ -28,7 +28,7 @@
             </div>
 
             <div id="userMenu" class="hidden absolute top-[70px] right-[20px] bg-white border border-gray-300 shadow-lg rounded-lg w-[180px] py-2 z-50">
-                <a href="{{ route('profile.show') }}" class="block px-4 py-2 hover:bg-gray-100">Perfil</a>
+                <a href="{{ route('profile.show', auth()->user()->profile) }}" class="block px-4 py-2 hover:bg-gray-100">Perfil</a>
 
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

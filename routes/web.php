@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\FormationController;
+use App\Http\Controllers\ProfileController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
 
     Route::get('/dashboard/{groupId}', [DashboardController::class, 'show'])->name('dashboard');
+    Route::get('/dashboard/settings/{groupId}', [SettingsController::class, 'show'])
+    ->name('dashboard.settings');
 
     Route::get('/dashboard/formations/{groupId}', [FormationController::class, 'index'])
     ->name('dashboard.formations.index');
@@ -31,10 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('dashboard/formations/{formation}', [FormationController::class, 'destroy'])
      ->name('formations.destroy');
 
-    Route::get('/dashboard/settings/{groupId}', [SettingsController::class, 'show'])->name('dashboard.settings');
-    Route::get('/profile', function () {
-        return view('profile.show');
-    })->name('profile.show');
+    Route::get('/profile/{profile}', [ProfileController::class, 'show'])
+    ->name('profile.show');
+    Route::patch('/profile/{profile}', [ProfileController::class, 'update'])
+    ->name('profile.update');
 
 });
 

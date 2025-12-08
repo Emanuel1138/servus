@@ -22,15 +22,8 @@
                 <div class="max-w-3xl mx-auto min-h-screen mt-9 mb-9">
                     <h1 class="text-2xl font-semibold text-gray-800 mb-6">Perfil</h1>
                     
-                    {{-- 
-                        ALTERAÇÃO AQUI: 
-                        1. Adicionado 'border border-gray-400' para igualar ao card de baixo.
-                        2. Alterado 'rounded-xl' para 'rounded-lg' para padronizar.
-                        3. Adicionado 'mb-8' para dar espaçamento entre os cards.
-                    --}}
                    <div class="w-full bg-white border border-gray-400 rounded-lg shadow-md p-6 flex items-center gap-6 mb-8">
                     
-                    {{-- Foto com anel de destaque --}}
                     <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-gray-100 shadow-inner flex-shrink-0">
                         <img 
                             src="{{ $user->profile_photo_url ?? 'https://via.placeholder.com/150' }}" 
@@ -48,7 +41,6 @@
                             email@gmail.com
                         </p>
 
-                        {{-- MELHORIA: Badge de cargo estilizada --}}
                         <div>
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                 Coordenador
