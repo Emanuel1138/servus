@@ -5,6 +5,7 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EventController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,13 @@ Route::middleware('auth')->group(function () {
     ->name('profile.show');
     Route::patch('/profile/{profile}', [ProfileController::class, 'update'])
     ->name('profile.update');
+
+    Route::get('dashboard/{groupId}/events', [EventController::class, 'index'])->name('events.index');
+    Route::get('dashboard/events/create', [EventController::class, 'create'])->name('events.create');
+    Route::post('dashboard/events', [EventController::class, 'store'])->name('events.store');
+    Route::get('dashboard/events/{event}/edit', [EventController::class, 'edit'])->name('events.edit');
+    Route::put('dashboard/events/{event}', [EventController::class, 'update'])->name('events.update');
+    Route::delete('dashboard/events/{event}', [EventController::class, 'destroy'])->name('events.destroy');
 
 });
 

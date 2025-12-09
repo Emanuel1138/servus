@@ -40,4 +40,9 @@ class Group extends Model
         return $this->hasMany(Formation::class);
     }
 
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
 }
