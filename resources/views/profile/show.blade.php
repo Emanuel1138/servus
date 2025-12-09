@@ -73,7 +73,6 @@
                                 </div>
                             </div>
 
-                            {{-- Segundo Nome --}}
                             <div class="px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 pt-[30px] pb-[10px]">
                                 <div>
                                     <label for="segundo_nome" class="block text-gray-700 font-medium mb-1">
@@ -94,7 +93,6 @@
                                 </div>
                             </div>
 
-                            {{-- Telefone --}}
                             <div class="px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 pt-[30px] pb-[10px]">
                                 <div>
                                     <label for="telefone" class="block text-gray-700 font-medium mb-1">
@@ -117,16 +115,20 @@
 
                             <div class="px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 pt-[30px] pb-[10px]">
                                 <div>
-                                    <label for="data_nascimento" class="block text-gray-700 font-medium mb-1">
+                                    <label for="birth_date" class="block text-gray-700 font-medium mb-1">
                                         Data de Nascimento
                                     </label>
                                 </div>
 
                                 <div class="md:col-span-2">
-                                    <input type="date" id="data_nascimento" name="birth_date"
-                                        value="{{ old('birth_date', optional($profile->birth_date)->format('Y-m-d')) }}"
-                                        class="w-full border border-gray-300 rounded px-3 py-2 
-                                        focus:outline-none focus:ring-2 focus:ring-green-500">
+                                  <input type="text"
+                                        id="birth_date"
+                                        name="birth_date"
+                                        placeholder="dd/mm/aaaa"
+                                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                        value="{{ old('birth_date', $profile->birth_date ? \Carbon\Carbon::parse($profile->birth_date)->format('d/m/Y') : '') }}">
+
+
 
                                     @error('birth_date')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -136,16 +138,18 @@
 
                             <div class="px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 pt-[30px] pb-[30px]">
                                 <div>
-                                    <label for="data_investidura" class="block text-gray-700 font-medium mb-1">
+                                    <label for="investiture_date" class="block text-gray-700 font-medium mb-1">
                                         Data da Investidura
                                     </label>
                                 </div>
 
                                 <div class="md:col-span-2">
-                                    <input type="date" id="data_investidura" name="investiture_date"
-                                        value="{{ old('investiture_date', optional($profile->investiture_date)->format('d-m-y')) }}"
-                                        class="w-full border border-gray-300 rounded px-3 py-2 
-                                        focus:outline-none focus:ring-2 focus:ring-green-500">
+                                    <input type="text"
+                                        id="investiture_date"
+                                        name="investiture_date"
+                                        placeholder="dd/mm/aaaa"
+                                        class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+                                        value="{{ old('investiture_date', $profile->investiture_date ? \Carbon\Carbon::parse($profile->investiture_date)->format('d/m/Y') : '') }}">
 
                                     @error('investiture_date')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -174,4 +178,59 @@
             </div>
         </main>
     </div>
+    @section('scripts')
+        <script>
+            IMask(document.getElementById('telefone'), {
+                mask: '(00) 00000-0000'
+            });
+
+           function aplicarMascaraData(elementId) {
+                var element = document.getElementById(elementId);
+
+                var maskOptions = {
+                    mask: Date,
+                    pattern: 'd{/}`m{/}`Y',
+                    blocks: {
+                    d: {
+                        mask: IMask.MaskedRange,
+                        from: 1,
+                        to: 31,
+                        maxLength: 2
+                    },
+                    m: {
+                        mask: IMask.MaskedRange,
+                        from: 1,
+                        to: 12,
+                        maxLength: 2
+                    },
+                    Y: {
+                        mask: IMask.MaskedRange,
+                        from: 1900,
+                        to: 2099,
+                        maxLength: 4
+                    }
+                    },
+                    format: function (date) {
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear();
+                    return [day, month, year].map(n => String(n).padStart(2, '0')).join('/');
+                    },
+                    parse: function (str) {
+                    var parts = str.split('/');
+                    return new Date(parts[2], parts[1] - 1, parts[0]);
+                    }
+                };
+
+                return IMask(element, maskOptions);
+            }
+
+            
+            aplicarMascaraData('birth_date');
+            aplicarMascaraData('investiture_date');
+
+
+        </script>
+
+    @endsection
 @endsection

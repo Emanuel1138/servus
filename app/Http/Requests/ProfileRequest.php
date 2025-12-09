@@ -17,8 +17,8 @@ class ProfileRequest extends FormRequest
             'first_name'        => 'nullable|string|max:100',
             'last_name'         => 'nullable|string|max:100',
             'phone'             => 'nullable|string|max:20',
-            'birth_date'        => 'nullable|date',
-            'investiture_date'  => 'nullable|date',
+            'birth_date'        => 'nullable|string',
+            'investiture_date'  => 'nullable|string',
             'user_id'           => 'required|exists:users,id',
         ];
     }

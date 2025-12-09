@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
+    <script src="https://unpkg.com/imask"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
     @vite('resources/css/app.css') 
 </head>
 <body class="bg-white min-h-screen flex flex-col">
@@ -78,7 +82,8 @@
         </div>
         <p>&copy 2025 Servus. Todos os direitos reservados.</p>
     </footer>
-
+    
+    @yield('scripts')
     <script>
         const button = document.getElementById('userMenuButton');
         const menu = document.getElementById('userMenu');

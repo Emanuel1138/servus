@@ -50,18 +50,25 @@ class ProfileController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(ProfileRequest $request, Profile $profile)
     {
         $validated = $request->validate([
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['nullable', 'string', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:20'],
-            'birth_date' => ['nullable', 'date'],
-            'investiture_date' => ['nullable', 'date'],
+            'first_name'        => ['required', 'string', 'max:255'],
+            'last_name'         => ['nullable', 'string', 'max:255'],
+            'phone'             => ['nullable', 'string', 'max:20'],
+            'birth_date'        => ['nullable', 'string'], 
+            'investiture_date'  => ['nullable', 'string'],
         ]);
+
+        if (!empty($request->birth_date)) {
+            $validated['birth_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $request->birth_date)
+                ->format('Y-m-d');
+        }
+
+        if (!empty($request->investiture_date)) {
+            $validated['investiture_date'] = \Carbon\Carbon::createFromFormat('d/m/Y', $request->investiture_date)
+                ->format('Y-m-d');
+        }
 
         $profile->update($validated);
 
@@ -70,9 +77,6 @@ class ProfileController extends Controller
             ->with('success', 'Perfil atualizado com sucesso!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Profile $profile)
     {
         //
