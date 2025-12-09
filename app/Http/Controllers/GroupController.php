@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\GroupRequest;
 
 class GroupController extends Controller
 {
@@ -30,7 +31,7 @@ class GroupController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
 
         if (! Auth::check()) {
@@ -72,7 +73,7 @@ class GroupController extends Controller
         //
     }
 
-    public function update(Request $request, Group $group)
+    public function update(GroupRequest $request, Group $group)
     {
         if (! Auth::check()) {
             abort(403);
