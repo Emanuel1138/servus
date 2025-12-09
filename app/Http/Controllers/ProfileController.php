@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -52,7 +53,7 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Profile $profile)
+    public function update(ProfileRequest $request, Profile $profile)
     {
         $validated = $request->validate([
             'first_name' => ['required', 'string', 'max:255'],

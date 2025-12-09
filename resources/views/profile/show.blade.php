@@ -10,44 +10,36 @@
                     <img class="w-5" src="{{ asset('images/Arrow-left.svg') }}" alt="">    
                     <h1>Voltar</h1> 
                 </a>
-                
             </div>
             
-            <nav class="flex flex-col gap-4 p-6">
-                <a href=""> </a>
-            </nav>
+            <nav class="flex flex-col gap-4 p-6"></nav>
         </div>
+
         <main class="flex-1 p-8 min-h-screen">
             <div>
                 <div class="max-w-3xl mx-auto min-h-screen mt-9 mb-9">
                     <h1 class="text-2xl font-semibold text-gray-800 mb-6">Perfil</h1>
                     
-                   <div class="w-full bg-white border border-gray-400 rounded-lg shadow-md p-6 flex items-center gap-6 mb-8">
-                    
-                    <div class="w-24 h-24 rounded-full overflow-hidden border-4 border-gray-100 shadow-inner flex-shrink-0">
-                        <img 
-                            src="{{ $user->profile_photo_url ?? 'https://via.placeholder.com/150' }}" 
-                            alt="Foto de Perfil"
-                            class="w-full h-full object-cover"
-                        >
-                    </div>
+                    <div class="w-full bg-white border border-gray-400 rounded-lg shadow-md p-6 flex items-center gap-6 mb-8">
+                        
+                        <div class="flex justify-center items-center w-24 h-24 rounded-full overflow-hidden border-4 border-gray-700 shadow-inner flex-shrink-0">
+                            <img 
+                                src="{{ asset('images/icons/User.svg') }}" 
+                                alt="Foto de Perfil"
+                                class="w-[80%] object-cover"
+                            >
+                        </div>
 
-                    <div class="flex flex-col justify-center">
-                        <h2 class="text-2xl font-bold text-gray-900 leading-tight">
-                            Nome de Usuário
-                        </h2>
+                        <div class="flex flex-col justify-center">
+                            <h2 class="text-2xl font-bold text-gray-900 leading-tight">
+                                {{ auth()->user()->name }}
+                            </h2>
 
-                        <p class="text-gray-500 text-sm mb-3">
-                            email@gmail.com
-                        </p>
-
-                        <div>
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                Coordenador
-                            </span>
+                            <p class="text-gray-500 text-sm mb-3">
+                                {{ auth()->user()->email }}
+                            </p>
                         </div>
                     </div>
-                </div>
                     
                     <div class="bg-white border border-gray-400 rounded-lg shadow-md">
 
@@ -55,7 +47,8 @@
                             <h1 class="text-xl font-semibold text-gray-800">Informações do perfil</h1>
                         </div>
 
-                        <form action="#" method="POST">
+                        <form action="{{ route('profile.update', $profile) }}" method="POST">
+                            @method('patch')
                             @csrf
 
                             <input type="hidden" name="user_id" value="{{ auth()->id() }}">
@@ -68,18 +61,19 @@
                                 </div>
 
                                 <div class="md:col-span-2">
-                                    <input type="text" id="primeiro_nome" name="primeiro_nome"
-                                        value="{{ old('primeiro_nome') }}"
+                                    <input type="text" id="primeiro_nome" name="first_name"
+                                        value="{{ old('first_name', $profile->first_name) }}"
                                         placeholder="Ex.: João"
                                         class="w-full border border-gray-300 rounded px-3 py-2 
                                             focus:outline-none focus:ring-2 focus:ring-green-500">
 
-                                    @error('primeiro_nome')
+                                    @error('first_name')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
 
+                            {{-- Segundo Nome --}}
                             <div class="px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 pt-[30px] pb-[10px]">
                                 <div>
                                     <label for="segundo_nome" class="block text-gray-700 font-medium mb-1">
@@ -88,18 +82,19 @@
                                 </div>
 
                                 <div class="md:col-span-2">
-                                    <input type="text" id="segundo_nome" name="segundo_nome"
-                                        value="{{ old('segundo_nome') }}"
+                                    <input type="text" id="segundo_nome" name="last_name"
+                                        value="{{ old('last_name', $profile->last_name) }}"
                                         placeholder="Ex.: Silva"
                                         class="w-full border border-gray-300 rounded px-3 py-2 
                                             focus:outline-none focus:ring-2 focus:ring-green-500">
 
-                                    @error('segundo_nome')
+                                    @error('last_name')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
 
+                            {{-- Telefone --}}
                             <div class="px-6 py-4 grid grid-cols-1 md:grid-cols-3 gap-4 pt-[30px] pb-[10px]">
                                 <div>
                                     <label for="telefone" class="block text-gray-700 font-medium mb-1">
@@ -108,13 +103,13 @@
                                 </div>
 
                                 <div class="md:col-span-2">
-                                    <input type="text" id="telefone" name="telefone"
-                                        value="{{ old('telefone') }}"
+                                    <input type="text" id="telefone" name="phone"
+                                        value="{{ old('phone', $profile->phone) }}"
                                         placeholder="Ex.: (88) 99999-0000"
                                         class="w-full border border-gray-300 rounded px-3 py-2 
                                             focus:outline-none focus:ring-2 focus:ring-green-500">
 
-                                    @error('telefone')
+                                    @error('phone')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -128,12 +123,12 @@
                                 </div>
 
                                 <div class="md:col-span-2">
-                                    <input type="date" id="data_nascimento" name="data_nascimento"
-                                        value="{{ old('data_nascimento') }}"
+                                    <input type="date" id="data_nascimento" name="birth_date"
+                                        value="{{ old('birth_date', optional($profile->birth_date)->format('Y-m-d')) }}"
                                         class="w-full border border-gray-300 rounded px-3 py-2 
-                                            focus:outline-none focus:ring-2 focus:ring-green-500">
+                                        focus:outline-none focus:ring-2 focus:ring-green-500">
 
-                                    @error('data_nascimento')
+                                    @error('birth_date')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
@@ -147,20 +142,18 @@
                                 </div>
 
                                 <div class="md:col-span-2">
-                                    <input type="date" id="data_investidura" name="data_investidura"
-                                        value="{{ old('data_investidura') }}"
+                                    <input type="date" id="data_investidura" name="investiture_date"
+                                        value="{{ old('investiture_date', optional($profile->investiture_date)->format('d-m-y')) }}"
                                         class="w-full border border-gray-300 rounded px-3 py-2 
-                                            focus:outline-none focus:ring-2 focus:ring-green-500">
+                                        focus:outline-none focus:ring-2 focus:ring-green-500">
 
-                                    @error('data_investidura')
+                                    @error('investiture_date')
                                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                     @enderror
                                 </div>
                             </div>
 
-
                             <div class="px-6 py-4 flex justify-end space-x-3">
-
                                 <a href="{{ url()->previous() }}"
                                     class="flex-1 text-center border border-gray-400 py-2 rounded hover:border-gray-700 transition">
                                     Cancelar
@@ -170,7 +163,6 @@
                                     class="flex-1 bg-green-400 border border-green-700 py-2 rounded hover:bg-green-500 transition-colors duration-200">
                                     Salvar Perfil
                                 </button>
-
                             </div>
 
                         </form>
@@ -178,7 +170,6 @@
                     </div>
 
                 </div>
-
 
             </div>
         </main>
